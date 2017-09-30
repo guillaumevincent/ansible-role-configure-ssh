@@ -6,15 +6,15 @@ galaxy_info:
   platforms:
   - name: EL
     versions:
-    - all
+    - 7
   - name: Fedora
     versions:
-    - all
+    - 26
   - name: Debian
     versions:
-    - all
+    - jessie
   - name: Ubuntu
     versions:
-    - all
+    - trusty
   galaxy_tags:
     - ssh
