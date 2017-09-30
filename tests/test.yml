@@ -10,10 +10,12 @@
       shell: cat /etc/ssh/sshd_config | grep '^PasswordAuthentication yes'
       register: PasswordAuthenticationYes
       failed_when: PasswordAuthenticationYes.stdout != ""
+      changed_when: false
 
     - name: PasswordAuthentication should be set to no
       shell: cat /etc/ssh/sshd_config | grep '^PasswordAuthentication no'
       register: PasswordAuthenticationNo
+      changed_when: false
 
     - assert:
         that: PasswordAuthenticationNo.stdout == "PasswordAuthentication no"
@@ -26,10 +28,12 @@
       shell: cat /etc/ssh/sshd_config | grep '^PermitRootLogin yes'
       register: PermitRootLoginYes
       failed_when: PermitRootLoginYes.stdout != ""
+      changed_when: false
 
     - name: PermitRootLogin should be set to no
       shell: cat /etc/ssh/sshd_config | grep '^PermitRootLogin no'
       register: PermitRootLoginNo
+      changed_when: false
 
     - assert:
         that: PermitRootLoginNo.stdout == "PermitRootLogin no"
