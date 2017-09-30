@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Guillaume Vincent
+  description: configure ssh for better security
+  license: license MIT
+  min_ansible_version: 2
+  platforms:
+  - name: EL
+    versions:
+    - all
+  - name: Fedora
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  galaxy_tags:
+    - ssh

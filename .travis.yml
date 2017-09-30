@@ -1,0 +1,20 @@
+---
+language: python
+python: "2.7"
+
+sudo: required
+dist: trusty
+
+install:
+  - sudo apt-get install -y ansible
+  - ansible --version
+  - 'printf "[defaults]\nroles_path=../" > ansible.cfg'
+
+env:
+  - ANSIBLE_HOST_KEY_CHECKING=False
+
+script:
+  - ansible-playbook -i tests/inventory tests/test.yml -v
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

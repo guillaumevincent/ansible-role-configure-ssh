@@ -1,0 +1,49 @@
+---
+- name: set ssh_port
+  set_fact:
+    ssh_port: "{{ ssh_port | default(22) }}"
+
+- debug: msg="ssh port {{ ssh_port }}"
+
+- name: change ssh port in /etc/ssh/sshd_config
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^Port"
+    line: "Port {{ ssh_port }}"
+  notify:
+   - restart ssh redhat
+   - restart ssh debian
+
+- name: disallow password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "PasswordAuthentication no"
+  notify:
+   - restart ssh redhat
+   - restart ssh debian
+
+- name: Comment PasswordAuthentication yes if present
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication yes'
+    replace: '#PasswordAuthentication yes'
+  notify:
+   - restart ssh redhat
+   - restart ssh debian
+
+- name: disallow root SSH access
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "PermitRootLogin no"
+  notify:
+   - restart ssh redhat
+   - restart ssh debian
+
+- name: Comment PermitRootLogin yes if present
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin yes'
+    replace: '#PermitRootLogin yes'
+  notify:
+   - restart ssh redhat
+   - restart ssh debian
